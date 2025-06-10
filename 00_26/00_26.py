@@ -8,21 +8,45 @@ __license__ = "Feel free to copy, I appreciate if you acknowledge Python for Mic
 # Image smoothing, denoising
 # Averaging, gaussian blurring, median, bilateral filtering
 #OpenCV has a function cv2.filter2D(), which convolves whatever kernel we define with the image.
+import os
+print(os.getcwd())
+
 
 import cv2
 import numpy as np
 from matplotlib import pyplot as plt
-img = cv2.imread(r"..\images\noisy.jpg",1)
-kernel = np.ones((5,5),np.float32)/25
-filt_2D = cv2.filter2D(img,-1,kernel)    #Convolution using the kernel we provide
+#mg = cv2.imread(r"..\images\RGBY.jpg", 1)
+img = cv2.imread(r"..\images\BSE_Google_noisy.jpg", 1)
+kernel = np.ones((5,5),np.float32)/25 #np to define kernel, devide by 25 so that it equates to 1, if 3*3 dovide by 9, so all the matrix equates 1 and doesn't change the energy of img
+filt_2D = cv2.filter2D(img,-1,kernel)    #defined fliter, convoluting the kernel we provide
+cv2.imshow("Original", img)
+cv2.imshow("2D filtered", filt_2D)
+cv2.waitKey(0)          
+cv2.destroyAllWindows() 
+
+
+cv2.imshow("2D filtered", filt_2D)
+
+
+
+import cv2
+import numpy as np
+from matplotlib import pyplot as plt
+img = cv2.imread(r"..\images\BSE_Google_noisy.jpg", 1)
+kernel = np.ones((5,5),np.float32)/25 #np to define kernel, devide by 25 so that it equates to 1, if 3*3 dovide by 9, so all the matrix equates 1 and doesn't change the energy of img
+filt_2D = cv2.filter2D(img,-1,kernel)    #defined fliter, convoluting the kernel we provide
+
 blur = cv2.blur(img,(5,5))   #Convolution with a normalized filter. Same as above for this example.
 blur_gaussian = cv2.GaussianBlur(img,(5,5),0)  #Gaussian kernel is used. 
 median_blur = median = cv2.medianBlur(img,5)  #Using kernel size 5. Better on edges compared to gaussian.
 bilateral_blur = cv2.bilateralFilter(img,9,75,75)  #Good for noise removal but retain edge sharpness. 
 
 
-cv2.imshow("Original", img)
+#cv2.imshow("Original", img)
 cv2.imshow("2D filtered", filt_2D)
+cv2.waitKey(0)          
+cv2.destroyAllWindows() 
+
 cv2.imshow("Blur", blur)
 cv2.imshow("Gaussian Blur", blur_gaussian)
 cv2.imshow("Median Blur", median_blur)

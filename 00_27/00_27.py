@@ -95,7 +95,8 @@ plt.hist(clahe_img.flat, bins =100, range=(0,255))
 # binary thresholding
 ret1,th1 = cv2.threshold(clahe_img,185,200,cv2.THRESH_BINARY)
 
-# Otsu's thresholding, automatically finds the threshold point. 
+# Otsu's thresholding, automatically finds the threshold point. which was 190,
+# we defined 190 ourself looking at my histogram 
 #Compare wth above value provided by us (185)
 ret2,th2 = cv2.threshold(clahe_img,0,255,cv2.THRESH_BINARY+cv2.THRESH_OTSU)
 
